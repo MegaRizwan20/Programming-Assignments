@@ -81,8 +81,8 @@ private:
    *   and not on the BSTInt object directly.
    */
   static void deleteAll(BSTNodeInt* n);
-
-
+ 
+  int height_helper(BSTNodeInt* r) const;
 
 };
 
