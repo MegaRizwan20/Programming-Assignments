@@ -129,7 +129,23 @@ unsigned int BSTInt::size() const
 int BSTInt::height() const
 {
   // TODO
-  return 0;
+  if (BSTInt::empty()) {
+    return 0;
+  }
+  else if (root->left == NULL && root-> right == NULL){
+    return 0;
+  }
+  else {
+    int heightleft = root->left->height + 1;
+    int heightright = root->right->height + 1;
+    if (heightleft>heightright){
+      return heightleft;
+    }
+    else {
+      return heightright;
+    }
+    
+  }
 }
 
 
@@ -138,7 +154,12 @@ int BSTInt::height() const
 bool BSTInt::empty() const 
 {
   // TODO
-  return false;
+  if (!root) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 
@@ -152,5 +173,19 @@ bool BSTInt::empty() const
 void BSTInt::deleteAll(BSTNodeInt* n)
 {
   // TODO
-
+  /*if (n->left != NULL) {
+    deleteAll(n->left);
+  }
+  else if (n->right != NULL) {
+    deleteAll(n->right);
+  }
+  else {
+    delete n;
+  }*/
+  if (n) {
+    deleteAll(n->left);
+    deleteAll(n->right);
+    delete n;
+  }
 }
+
