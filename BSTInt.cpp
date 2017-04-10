@@ -126,27 +126,24 @@ unsigned int BSTInt::size() const
 /** Return the height of the BST.
     Height of tree with just root node is 0
  */
+
+int BSTInt::height_helper(BSTNodeInt* r) const{
+  if (!r || (r->left==NULL && r->right == NULL)){
+    return 0;
+  }
+  int leftheight = height_helper(r->left);
+  int rightheight = height_helper(r->right);
+
+  return leftheight>rightheight? leftheight+1:rightheight+1;
+}
+
+	
 int BSTInt::height() const
 {
-  // TODO
-  if (BSTInt::empty()) {
-    return 0;
-  }
-  else if (root->left == NULL && root-> right == NULL){
-    return 0;
-  }
-  else {
-    int heightleft = root->left->height + 1;
-    int heightright = root->right->height + 1;
-    if (heightleft>heightright){
-      return heightleft;
-    }
-    else {
-      return heightright;
-    }
-    
-  }
+  // TODO 
+  return height_helper(root); 
 }
+
 
 
 /** Return true if the BST is empty, else false. 
