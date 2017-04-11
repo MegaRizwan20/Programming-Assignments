@@ -56,31 +56,43 @@ bool BSTInt::insert(int item)
  BSTNodeInt* newNode = new BSTNodeInt(item);
   while (true)
   {
+    /* If element is less than current data */
     if (item < curr->data) 
     {
+      /* Checking if a left child exists */
       if (curr->left == NULL)
       {
         curr->left = newNode;
         newNode->parent = curr;
         break;
       }
+      /* If it exists then we move the pointer to the left child */
       else
       {
         curr = curr->left;
       }
     }
-    else 
+    /* Else if element is greater than current data */
+    else if (item > curr->data) 
     {
+      /* Checking if right child exists */
       if (curr->right == NULL)
       {
         curr->right = newNode;
         newNode->parent = curr;
         break;
       }
+      /* If it does exist we move the pointer to the right child */
       else
       {
         curr = curr->right;
       }
+    }
+    /* Else the element equals the data so we return false for the checkpoint*/
+    else
+    {
+      delete newNode;
+      return false;
     }
   }
 
