@@ -1,3 +1,10 @@
+/*
+ * Authors: Rizwan Khan, Zhuoran Gu
+ * UCSD Email: rikhan@ucsd.edu, zhg050@ucsd.edu
+ * PID: A12236946, A53213113
+ * CSE Login: cs100sgv, zhg050
+ */
+
 #ifndef BST_INT_H
 #define BST_INT_H
 
@@ -81,6 +88,8 @@ private:
    *   and not on the BSTInt object directly.
    */
   static void deleteAll(BSTNodeInt* n);
+
+  int height_helper(BSTNodeInt* r) const;
 
 
 

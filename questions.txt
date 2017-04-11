@@ -1,0 +1,75 @@
+/*
+ * Authors: Rizwan Khan, Zhuoran Gu
+ * UCSD Email: rikhan@ucsd.edu, zhg050@ucsd.edu
+ * PID: A12236946, A53213113
+ * CSE Login: cs100sgv, zhg050
+ */
+
+Q1. BSTNodeInt.o testBST.o BSTInt.o
+
+Q2. In the file BSTInt.cpp, remove the name scope from the insert 
+function. That is, change the function header from
+
+bool BSTInt::insert(int item)
+
+to
+
+bool insert(int item)
+  
+    Answer
+    ------
+The errors are:
+BSTInt.cpp: In function 'bool insert(int)':
+BSTInt.cpp:25:8: error: 'root' was not declared in this scope
+   if (!root) {
+        ^
+BSTInt.cpp:27:7: error: 'isize' was not declared in this scope
+     ++isize;
+       ^
+BSTInt.cpp:31:22: error: 'root' was not declared in this scope
+   BSTNodeInt* curr = root;
+                      ^
+BSTInt.cpp:56:5: error: 'isize' was not declared in this scope
+   ++isize;
+     ^
+make: *** [BSTInt.o] Error 1
+
+The errors means the variable 'root' and 'isize' were not declared in the 
+global scope.This is because the 'root' and 'isize' were defined within the 
+scope of BSTInt instead of the insert method. We need to use the scope 
+resolution operator to include the scopeof what is in BSTInt.
+
+
+Q3. In a sentence or two, describe the bug in the code. What function was it, 
+    and what was it?
+    
+    Answer
+    ------
+    The insert function had the bug. The bug was overwritting data in children
+    nodes by inserting a node where a child node already existed.
+
+Q4. In about a paragraph, describe the process you used to find and fix the bug. 
+    Include any tools you used and how you used them. If you were able to spot 
+    the bug by just looking at the code, describe your reasoning process in detail. 
+    We're not looking for the corrected code here (we already have that in your 
+    .cpp file). Rather we're looking for a description of your debugging process. 
+    Please be specific.
+    
+    Answer
+    ------
+    We found the bug by making a bunch of test cases and testing each and every
+    single test case. We wrote out all the test cases that failed in the
+    original code. One test that failed was inserting 1, 3, then 2 and another
+    test that was failed was 11, 10, 12, 13, then 14. The program was saying it
+    was unable to find the data in the node with the value of 13. After
+    analyzing the find method and seeing nothing was wrong, we decided to write
+    out what the insert and find code were doing with pen and paper. As we were
+    doing the inserts, we noticed that the current node wouldn't point the
+    correct node to do the insert. It would overwrite the data of the node
+    instead of inserting it as a child node. In order to fix this we went to
+    the part of the code where the insert was happening and chose to change how
+    the code was traversing through the tree. We decided to make a while loop
+    and loop through the tree and find the proper place the node belonged. So
+    we chose to make a new node when the node when there was a NULL space for
+    a child otherwise we traversed as necessary and inserted when the proper
+    space was reached. 

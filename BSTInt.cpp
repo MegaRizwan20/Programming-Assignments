@@ -1,3 +1,9 @@
+/*
+ * Authors: Rizwan Khan, Zhuoran Gu
+ * UCSD Email: rikhan@ucsd.edu, zhg050@ucsd.edu
+ * PID: A12236946, A53213113
+ * CSE Login: cs100sgv, zhg050
+ */
 
 #include "BSTInt.h"
 
@@ -56,31 +62,43 @@ bool BSTInt::insert(int item)
  BSTNodeInt* newNode = new BSTNodeInt(item);
   while (true)
   {
+    /* If element is less than current data */
     if (item < curr->data) 
     {
+      /* Checking if a left child exists */
       if (curr->left == NULL)
       {
         curr->left = newNode;
         newNode->parent = curr;
         break;
       }
+      /* If it exists then we move the pointer to the left child */
       else
       {
         curr = curr->left;
       }
     }
-    else 
+    /* Else if element is greater than current data */
+    else if (item > curr->data) 
     {
+      /* Checking if right child exists */
       if (curr->right == NULL)
       {
         curr->right = newNode;
         newNode->parent = curr;
         break;
       }
+      /* If it does exist we move the pointer to the right child */
       else
       {
         curr = curr->right;
       }
+    }
+    /* Else the element equals the data so we return false for the checkpoint*/
+    else
+    {
+      delete newNode;
+      return false;
     }
   }
 
@@ -126,23 +144,41 @@ unsigned int BSTInt::size() const
 /** Return the height of the BST.
     Height of tree with just root node is 0
  */
-int BSTInt::height() const
-{
-  // TODO
-  return 0;
+
+int BSTInt::height_helper(BSTNodeInt* r) const{
+  if (!r || (r->left==NULL && r->right == NULL)){
+    return 0;
+  }
+  int leftheight = height_helper(r->left);
+  int rightheight = height_helper(r->right);
+
+  return leftheight>rightheight? leftheight+1:rightheight+1;
 }
 
+/** Finds the height of the tree. This means it is calculating
+ *  how tall the tree is based on the longest branch on the tree.
+ *  This is done by calling the height_helper function.
+ *  This returns the height of the tree to the user as an integer.
+ */	
+int BSTInt::height() const
+{
+  // Return the height of the tree to the user
+  return height_helper(root); 
+}
 
 /** Return true if the BST is empty, else false. 
  */
 bool BSTInt::empty() const 
 {
-  // TODO
-  return false;
+  /* Checking if a root exists or not. If it does not exist then
+   * return true, otherwise return false */
+  if (!root) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
-
-
-
 
 /** do a postorder traversal, deleting nodes
  * This is a helper for the destructor
@@ -151,6 +187,12 @@ bool BSTInt::empty() const
  */
 void BSTInt::deleteAll(BSTNodeInt* n)
 {
-  // TODO
-
+  /* Checking if a node exists and traversing through it to delete all
+   * of the nodes in a proper order. This is done recursively */
+  if (n) {
+    deleteAll(n->left);
+    deleteAll(n->right);
+    delete n;
+  }
 }
+
