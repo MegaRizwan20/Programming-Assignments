@@ -1,6 +1,38 @@
-Q1. BSTNodeInt.o testBST.o BSTInt.o
+Q1. What are all the files that are created when I type 'make bst' for the first time?
 
-Q2
+    Answer
+    ------
+    BSTNodeInt.o BSTInt.o testBST.o
+
+Q2. In the file BSTInt.cpp, remove the name scope from the insert function. That is, change the function header from
+
+    bool BSTInt::insert(int item)
+
+    to
+
+    bool insert(int item)
+
+    Copy and paste the error that results when you now compile the code into your questions.txt file, and then explain what the error means and why it occurs.
+    
+    Answer
+    ------
+The errors are:
+BSTInt.cpp: In function 'bool insert(int)':
+BSTInt.cpp:25:8: error: 'root' was not declared in this scope
+   if (!root) {
+        ^
+BSTInt.cpp:27:7: error: 'isize' was not declared in this scope
+     ++isize;
+       ^
+BSTInt.cpp:31:22: error: 'root' was not declared in this scope
+   BSTNodeInt* curr = root;
+                      ^
+BSTInt.cpp:56:5: error: 'isize' was not declared in this scope
+   ++isize;
+     ^
+make: *** [BSTInt.o] Error 1
+
+The errors means the variable 'root' and 'isize' were not declared in the global scope.This is because the 'root' and 'isize' were defined within the scope of BSTInt instead of the insert method. We need to use the scope resolution operator to include the scopeof what is in BSTInt.
 
 
 Q3. In a sentence or two, describe the bug in the code. What function was it, 
