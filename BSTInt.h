@@ -70,8 +70,6 @@ public:
    */
   bool empty() const;
 
-
-
 private:
 
   /** Pointer to the root of this BST, or 0 if the BST is empty */
