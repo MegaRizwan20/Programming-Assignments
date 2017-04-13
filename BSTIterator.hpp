@@ -77,8 +77,8 @@ bool BSTIterator<Data>::operator==(BSTIterator<Data> const & other) const {
   // Notice that other is a reference and not a pointer, thus it cannot be null
   // Return true if other is equal to the calling object
   // Two iterators are equal if they point to the same BSTNode in the same BST  
-
-  return false;
+  return (this->curr == other.curr);
+  //return false;
 
 }
 
@@ -89,8 +89,8 @@ bool BSTIterator<Data>::operator!=(BSTIterator<Data> const & other) const {
   // Notice that other is a reference and not a pointer, thus it cannot be null
   // Return true if other is NOT equal to the calling object
   // Two iterators are equal if they point to the same BSTNode in the same BST
-
-  return false;
+  return (this->curr != other.curr);
+  //return false;
 
 }
 
