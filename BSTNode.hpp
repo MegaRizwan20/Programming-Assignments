@@ -2,6 +2,7 @@
 #define BSTNODE_HPP
 #include <iostream>
 #include <iomanip>
+using namespace std;
 
 /** Starter code for PA1, CSE 100 2017
  * Authors: Christine Alvarado, based on code by Paul Kube 
@@ -40,48 +41,45 @@ public:
 // the class declaration
 
 template <typename Data>
-BSTNode<Data>::BSTNode(const Data & d) : data(d), left(0), right(0), parent(0) {}
+BSTNode<Data>::BSTNode(const Data & d) : left(0), right(0), parent(0), data(d) {}
 
 /* Return a pointer to the BSTNode that contains the item that is sequentially 
  * next in the tree */
 template <typename Data>
 BSTNode<Data>* BSTNode<Data>::successor()
 {
-  //TODO  
-  if (this == NULL)
-  {
-    return 0;
-  }
-  else if (this->right != NULL)
+  //TODO
+  //cout << "SUCCESSOR STARTS"<< endl;
+  BSTNode<Data>* curr = this;
+  if (curr->right != NULL)
   { 
-    this = this->right;
-    while (this->left != NULL) 
+    curr = curr->right;
+    while (curr->left != NULL) 
       {
-        this = this->left;
+        curr = curr->left;
       }
-    return this;  
+    return curr;  
   }
   else 
   {
-   /* this = this->parent;
-    while (this->left == NULL || this->parent > this)
+    
+    if (curr->data < curr->parent->data)
     {
-      this = this->parent;
+      curr = curr->parent;
+      return curr;
+      //return curr->parent;
     }
-    return this;*/
-    if (this < this->parent)
+    else
     {
-      return this->parent;
-    }
-    else if (this > this->parent)
-    {
-      while (this->parent != NULL && this->parent < this)
+      while (curr->parent != NULL && curr->parent->data < curr->data)
       {
-        this = this->parent;
+        curr = curr->parent;
       }
-      if (this->parent != NULL)
+      if (curr->parent != NULL)
       {
-        return this->parent;;
+        curr = curr->parent;
+        return curr;
+        //return curr->parent;
       }
       else
       {

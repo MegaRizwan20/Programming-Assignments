@@ -127,11 +127,54 @@ int main() {
     }
 
     //cout << "All first insert tests passed " << endl;
+    cout << "Second insert test, testing inserting duplicate. " << endl;
+    c.push_back(5);
+    //c.push_back(5);
+
+    BSTInt a;
+
+    // Could use: for(auto item : v) { instead of the line below
+    for(int item : c) {
+        bool pr = a.insert(item);
+        if( !pr ) {
+            cout << "Incorrect bool return value when inserting " << item 
+                 << endl;
+            return -1;
+        }
+    }
+
+
+    /* Test size. */
+    cout << "Size is: " << a.size() << endl;
+    if(a.size() != 1) {
+        cout << "... which is incorrect." << endl;
+        return -1;
+    }
+
+    /* Test find return value. */
+    // Test the items that are already in the tree
+    for(int item : c) {
+        if(!a.find(item)) {
+            cout << "Incorrect return value when finding " << item << endl;
+            return -1;
+        }
+    }
+
+    /* Testing the height of a tree with only one node */
+    heightTest = a.height();
+    if (heightTest != 0)
+    {
+      cout << "Incorrect height for tree with one node " << endl;
+      return -1;
+    }
+
+    cout << "All tests passed!" << endl;
+    //return 0;
 
 
     /* UNCOMMENT THE LINES BELOW TO TEST THE TEMPLATE-BASED ITERATOR */
 
-    /*
+    
     // Test the template version of the BST  with ints 
     BST<int> btemp;
     for (int item : v) {
@@ -194,55 +237,14 @@ int main() {
                  << ": Incorrect inorder iteration of BST." << endl;
             return -1;
         }
+        //cout<< "TEST 1" << endl;
         ++it;
+        //cout << "END TEST" << endl;
     }
 
     cout << "success!" << endl;
 
-    */
-
-    // ADD MORE TESTS HERE.  You might also want to change what is input
-    // into the vector v.
-    cout << "Second insert test, testing inserting duplicate. " << endl;
-    c.push_back(5);
-    //c.push_back(5);
-
-    BSTInt a;
-
-    // Could use: for(auto item : v) { instead of the line below
-    for(int item : c) {
-        bool pr = a.insert(item);
-        if( !pr ) {
-            cout << "Incorrect bool return value when inserting " << item 
-                 << endl;
-            return -1;
-        }
-    }
-
-    /* Test size. */
-    cout << "Size is: " << a.size() << endl;
-    if(a.size() != 1) {
-        cout << "... which is incorrect." << endl;
-        return -1;
-    }
-
-    /* Test find return value. */
-    // Test the items that are already in the tree
-    for(int item : c) {
-        if(!a.find(item)) {
-            cout << "Incorrect return value when finding " << item << endl;
-            return -1;
-        }
-    }
-
-    /* Testing the height of a tree with only one node */
-    heightTest = a.height();
-    if (heightTest != 0)
-    {
-      cout << "Incorrect height for tree with one node " << endl;
-      return -1;
-    }
-
-    cout << "All tests passed!" << endl;
     return 0;
+   // ADD MORE TESTS HERE.  You might also want to change what is input
+    // into the vector v.
 }

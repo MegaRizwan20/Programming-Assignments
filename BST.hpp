@@ -119,14 +119,14 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
   // REPLACE THE LINE BELOW
   if (!root)
   {
-    root = new BSTNode<Data>*(item);
+    root = new BSTNode<Data>(item);
     ++isize;
     return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(root), true);
   }
 
   BSTNode<Data>* curr = root;
 
-  BSTNode<Data>* newNode = new BSTNode<Data>*(item);
+  BSTNode<Data>* newNode = new BSTNode<Data>(item);
   while (true)
   {
     if (item < curr->data)
@@ -135,6 +135,7 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
       {
         curr->left = newNode;
         newNode->parent = curr;
+        ++isize;
         break;
       }
       else
@@ -148,6 +149,7 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
       {
         curr->right = newNode;
         newNode->parent = curr;
+        ++isize;
         break;
       }
       else
@@ -272,8 +274,21 @@ template <typename Data>
 BSTNode<Data>* BST<Data>::first(BSTNode<Data>* root)
 {
   // TODO NOT ENTIRELY SURE IF WORKS AS NEEDED. WILL TEST
-  BSTIterator<Data> firstData = begin();
-  return *firstData;
+  //BSTIterator<Int>* firstData = begin();
+  //return *firstData;
+  if (!root) 
+  {
+    return NULL;
+  }
+  else
+  {
+    BSTNode<Data>* curr = root->left;
+    while (curr->left != NULL)
+    {
+      curr = curr->left;
+    }
+    return curr;
+  }
 }
 
 /** do a postorder traversal, deleting nodes
