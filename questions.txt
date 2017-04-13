@@ -72,4 +72,24 @@ Q4. In about a paragraph, describe the process you used to find and fix the bug.
     and loop through the tree and find the proper place the node belonged. So
     we chose to make a new node when the node when there was a NULL space for
     a child otherwise we traversed as necessary and inserted when the proper
-    space was reached. 
+    space was reached.
+
+Q5: Look at header for the insert method in the BST.hpp and compare it to the 
+    header of the insert method in BSTInt.h. For each class state whether the 
+    insert method passes its argument by value or by reference. Explain why 
+    each method probably uses the method that it uses (i.e. if pass by value, 
+    explain why not pass by reference, and if pass by reference, explain why
+    not pass by value).
+
+    Answer
+    ------
+    The insert method in the BSTInt.h is a pass by value because the item that
+    is being inserted is the actual value and not a reference to that item. You
+    can see it is a pass by value because we are not passing in "&item" which
+    would mean we are passing a reference to that item. The BST.hpp file is a
+    pass by reference because we are passing a reference of the item and
+    because we don't want to change what is being passed in, we pass it as a
+    constant data object to the insert function. This makes it so we start in
+    the first element and use that to iterate through the tree to elements that
+    are being inserted or already inside the tree.
+ 

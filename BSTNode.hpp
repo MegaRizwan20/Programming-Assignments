@@ -36,18 +36,43 @@ public:
 
 
 // Function definitions
-// For a templated class it's easiest to just put them in the same file as the class declaration
+// For a templated class it's easiest to just put them in the same file as 
+// the class declaration
 
 template <typename Data>
 BSTNode<Data>::BSTNode(const Data & d) : data(d), left(0), right(0), parent(0) {}
 
-/* Return a pointer to the BSTNode that contains the item that is sequentially next 
- * in the tree */
+/* Return a pointer to the BSTNode that contains the item that is sequentially 
+ * next in the tree */
 template <typename Data>
 BSTNode<Data>* BSTNode<Data>::successor()
 {
-  //TODO 
-  return NULL;
+  //TODO  
+  //if (!root)
+  if (this->right != NULL)
+  { 
+    this = this->right;
+    while (this->left != NULL) 
+      {
+        this = this->left;
+      }
+    return this;  
+  }
+  else if (this->right == NULL)
+  {
+    this = this->parent;
+    while (this->left == NULL || this->parent > this)
+    {
+      this = this->parent;
+    }
+    return this;  
+  }
+  else
+  {
+    return 0;
+  }
+  
+  //return NULL;
 }
 
 /** Overload operator<< to print a BSTNode's fields to an ostream. */
