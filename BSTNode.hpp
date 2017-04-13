@@ -48,8 +48,11 @@ template <typename Data>
 BSTNode<Data>* BSTNode<Data>::successor()
 {
   //TODO  
-  //if (!root)
-  if (this->right != NULL)
+  if (this == NULL)
+  {
+    return 0;
+  }
+  else if (this->right != NULL)
   { 
     this = this->right;
     while (this->left != NULL) 
@@ -58,19 +61,35 @@ BSTNode<Data>* BSTNode<Data>::successor()
       }
     return this;  
   }
-  else if (this->right == NULL)
+  else 
   {
-    this = this->parent;
+   /* this = this->parent;
     while (this->left == NULL || this->parent > this)
     {
       this = this->parent;
     }
-    return this;  
+    return this;*/
+    if (this < this->parent)
+    {
+      return this->parent;
+    }
+    else if (this > this->parent)
+    {
+      while (this->parent != NULL && this->parent < this)
+      {
+        this = this->parent;
+      }
+      if (this->parent != NULL)
+      {
+        return this->parent;;
+      }
+      else
+      {
+        return 0;
+      }
+    }  
   }
-  else
-  {
-    return 0;
-  }
+  
   
   //return NULL;
 }
