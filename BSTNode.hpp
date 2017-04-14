@@ -1,13 +1,15 @@
+/*
+ * Authors: Rizwan Khan, Zhuoran Gu
+ * UCSD Email: rikhan@ucsd.edu, zhg050@ucsd.edu
+ * PID: A12236946, A53213113
+ * CSE Login: cs100sgv, zhg050
+ */
+
 #ifndef BSTNODE_HPP
 #define BSTNODE_HPP
 #include <iostream>
 #include <iomanip>
 using namespace std;
-
-/** Starter code for PA1, CSE 100 2017
- * Authors: Christine Alvarado, based on code by Paul Kube 
- * ADD YOUR NAME AS AN AUTHOR HERE
- */
 
 template<typename Data>
 class BSTNode {
@@ -30,7 +32,7 @@ public:
    ** POSTCONDITION:  the BST is unchanged.
    ** RETURNS: the BSTNode that is the successor of this BSTNode,
    ** or 0 if there is none.
-   */ // TODO
+   */
   BSTNode<Data>* successor(); 
 
 }; 
@@ -48,48 +50,63 @@ BSTNode<Data>::BSTNode(const Data & d) : left(0), right(0), parent(0), data(d) {
 template <typename Data>
 BSTNode<Data>* BSTNode<Data>::successor()
 {
-  //TODO
-  //cout << "SUCCESSOR STARTS"<< endl;
+  // Create a BST Node that is set to the current node
   BSTNode<Data>* curr = this;
+  /* Check if there is anything to the right of the current node */
   if (curr->right != NULL)
   { 
+    // Set the right of the current node to the right of the current node
     curr = curr->right;
+    // Check if left of current node is NULL and if not then move to the left
     while (curr->left != NULL) 
-      {
-        curr = curr->left;
-      }
+    {
+      curr = curr->left;
+    }
     return curr;  
   }
+  // Else there is nothing to the right of the current node
   else 
   {
-    
+    /* If the parent's data is equal to null pointer, we return nullptr */
+    if (curr->parent == nullptr)
+    {
+      return nullptr;
+    }
+
+    /* Check if the current node's data is less than the parent's data */
     if (curr->data < curr->parent->data)
     {
       curr = curr->parent;
       return curr;
-      //return curr->parent;
     }
+    // Else the current node's data is greater than the parent's data
     else
     {
+      /* Check if the parent is not null and that the parent's data is less
+       * than the current node's data */
       while (curr->parent != NULL && curr->parent->data < curr->data)
       {
+        /* The parent of the current node is equal to nullptr so,
+         * return nullptr */
+        if (curr->parent == nullptr)
+        {
+          return nullptr;
+        }
         curr = curr->parent;
       }
+      // If the parent is not null then we return the parent
       if (curr->parent != NULL)
       {
         curr = curr->parent;
         return curr;
-        //return curr->parent;
       }
+      // Return 0 when we reached the biggest element in the tree
       else
       {
         return 0;
       }
     }  
   }
-  
-  
-  //return NULL;
 }
 
 /** Overload operator<< to print a BSTNode's fields to an ostream. */

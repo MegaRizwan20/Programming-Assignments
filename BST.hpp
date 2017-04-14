@@ -1,3 +1,10 @@
+/*
+ * Authors: Rizwan Khan, Zhuoran Gu
+ * UCSD Email: rikhan@ucsd.edu, zhg050@ucsd.edu
+ * PID: A12236946, A53213113
+ * CSE Login: cs100sgv, zhg050
+ */
+
 #ifndef BST_HPP
 #define BST_HPP
 #include "BSTNode.hpp"
@@ -58,7 +65,7 @@ public:
 
 
   /** Return true if the BST is empty, else false.
-   */ // TODO
+   */
   bool empty() const;
 
   /** Return an iterator pointing to the first (smallest) item in the BST.
@@ -114,23 +121,31 @@ BST<Data>::~BST() {
  */
 template <typename Data>
 std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
-  // TODO
-  // HINT: Copy code from your BSTInt class and change the return value
-  // REPLACE THE LINE BELOW
+
+  /* Checking if the root node exists */
   if (!root)
   {
+    /* If it doesn't then we create new node and increment the size
+     * and this new node becomes our root node */
     root = new BSTNode<Data>(item);
     ++isize;
     return std::pair<BSTIterator<Data>, bool>(BSTIterator<Data>(root), true);
   }
 
+  /* We make a current node set to the root node to traverse the tree */
   BSTNode<Data>* curr = root;
 
+  /* We create a new node because we are inserting in a new node */
   BSTNode<Data>* newNode = new BSTNode<Data>(item);
+  /* While we are trying to insert into the tree, do the condition
+   * checks */
   while (true)
   {
+    /* If what we are trying to insert is less than the current node
+     * then we will be moving to the left */
     if (item < curr->data)
     {
+      // If there is nothing to the left then we make a new node to the left 
       if (curr->left == NULL)
       {
         curr->left = newNode;
@@ -138,13 +153,17 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
         ++isize;
         break;
       }
+      // Else we point to the left of the current node
       else
       {
         curr = curr->left;
       }
     }
+    /* Else if the item we are trying to insert is greater than the current
+     * node then we will be doing operations to the right */
     else if (curr->data < item)
     {
+      // If there is nothing to the right then we make a new node to the right
       if (curr->right == NULL)
       {
         curr->right = newNode;
@@ -152,11 +171,13 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
         ++isize;
         break;
       }
+      // Else we point to the right of the current node
       else
       {
         curr = curr->right;
       }
     }
+    // Else the item is equal to the current node's data so we return false
     else
     {
       delete newNode;
@@ -178,24 +199,29 @@ std::pair<BSTIterator<Data>, bool> BST<Data>::insert(const Data& item) {
 template <typename Data>
 BSTIterator<Data> BST<Data>::find(const Data& item) const
 {
-  // TODO
-  // HINT: Copy code from your BSTInt class and change the return value
+
+  // Create a new current node equal to the root
   BSTNode<Data>* curr = root;
+  // While we are in the current, we do the following checks
   while (curr)
   {
+    // If the data of the current node is less than the item, we go right
     if (curr->data < item)
     {
       curr = curr->right;
     }
+    // Else if the item is less than current node data, we go left
     else if (item < curr->data)
     {
       curr = curr->left;
     }
+    // Else we return the current node
     else
     {
       return BSTIterator<Data>(curr);
     }
   }
+  // Otherwise we return null pointer
   return BSTIterator<Data>(nullptr);
 
 }
@@ -209,16 +235,21 @@ unsigned int BST<Data>::size() const
   return isize;
 }
 
+/** Helper method to get the height of the tree
+ */
 template <typename Data>
 int BST<Data>::height_helper(BSTNode<Data>* r) const
 {
+  // Check the existence of nodes on the tree
   if (!r || (r->left==NULL && r->right==NULL))
   {
     return 0;
   }
+  // Initialize the heights of the nodes to find the longest branch
   int leftheight = height_helper(r->left);
   int rightheight = height_helper(r->right);
   
+  // Return the height of the whole tree
   return leftheight>rightheight ? leftheight+1:rightheight+1;
 }
 
@@ -227,9 +258,7 @@ int BST<Data>::height_helper(BSTNode<Data>* r) const
 template <typename Data> 
 int BST<Data>::height() const
 {
-  // TODO
-  // HINT: Copy code from your BSTInt class
-  //return 0;
+  // Returns the height of the tree
   return height_helper(root);
 }
 
@@ -239,12 +268,13 @@ int BST<Data>::height() const
 template <typename Data>
 bool BST<Data>::empty() const
 {
-  // TODO
-  // HINT: Copy code form your BSTInt class
+
+  // If root does not exist then there is no tree, so return true
   if (!root)
   {
     return true;
   }
+  // Else return false
   else
   {
     return false;
@@ -273,20 +303,32 @@ BSTIterator<Data> BST<Data>::end() const
 template <typename Data>
 BSTNode<Data>* BST<Data>::first(BSTNode<Data>* root)
 {
-  // TODO NOT ENTIRELY SURE IF WORKS AS NEEDED. WILL TEST
-  //BSTIterator<Int>* firstData = begin();
-  //return *firstData;
+  // Made a new BSTnode called curr
+  BSTNode<Data>* curr;
+  // If the root does not exist return NULL
   if (!root) 
   {
     return NULL;
   }
+  // Else do the following checks
   else
   {
-    BSTNode<Data>* curr = root->left;
+    // If there is something to the left, we go left and set curr to left node
+    if (root->left != NULL)
+    {
+      curr = root->left;
+    }
+    // Else we set the curr to the root
+    else
+    {
+      curr = root;
+    }
+    // While the left is not null, we go to the left
     while (curr->left != NULL)
     {
       curr = curr->left;
     }
+    // We return where ever curr ends up. This gets the smallest value in tree
     return curr;
   }
 }
@@ -296,12 +338,14 @@ BSTNode<Data>* BST<Data>::first(BSTNode<Data>* root)
 template <typename Data>
 void BST<Data>::deleteAll(BSTNode<Data>* n)
 {
-  // TODO
-  // HINT: Copy code from your BSTInt class.
+  // Check if there is a BSTNode in the tree
   if (n)
   {
+    // Recursively deletes from the left
     deleteAll(n->left);
+    // Recursively deletes from the right
     deleteAll(n->right);
+    // Finally deletes the node
     delete n;
   }
 }

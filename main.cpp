@@ -1,3 +1,10 @@
+/*
+ * Authors: Rizwan Khan, Zhuoran Gu
+ * UCSD Email: rikhan@ucsd.edu, zhg050@ucsd.edu
+ * PID: A12236946, A53213113
+ * CSE Login: cs100sgv, zhg050
+ */
+
 #include "BST.hpp"
 #include <iostream>
 #include <algorithm>
@@ -48,19 +55,18 @@ int main(int argc, char* argv[])
 	  
         // Follow the comments below to add code:
         
-        // TODO: Create a new BST here
-        
+        // WE made a new BST
         BST<string> myBST; 
         
+        // We got the names from the files into the BST
         while (getline(in, name)) {
-            // TODO: add the name string to the BST
-           myBST.insert(name);
-            
+           
+          myBST.insert(name);
         }
 
-        // TODO: Get the height of the BST and store it in height
+        // Get the height of the BST and store it in height
         height = myBST.height();
-        // TODO: Get the size of the BST and store it in size
+        // Get the size of the BST and store it in size
         size = myBST.size();  
         // DO NOT CHANGE THE LINES BELOW
         cout << "Size of tree: " << size << endl;
@@ -71,9 +77,12 @@ int main(int argc, char* argv[])
             cout << "Enter actor/actress name: " << endl;
             getline(cin, name);
             
-            // TODO: Chainge the if statment to check is name is in the BST
+            // Looking for the names in the BST
             BSTIterator<string> found = myBST.find(name);
-            if (*(found) == name) {
+            BSTIterator<string> nullCheck = BSTIterator<string>(nullptr);
+            /* Checking if the name is actually in the BST and will return
+             * the name if it is there */
+            if (found != nullCheck) {
                 cout << name << " found!" << endl;
             }
             else {

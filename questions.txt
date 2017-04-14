@@ -92,4 +92,36 @@ Q5: Look at header for the insert method in the BST.hpp and compare it to the
     constant data object to the insert function. This makes it so we start in
     the first element and use that to iterate through the tree to elements that
     are being inserted or already inside the tree.
- 
+
+Q6: Which input file produces taller trees (sorted or random)?
+
+    Answer
+    ------
+    The sorted input file produces the taller tree. The reason being is because
+    it is sorted, all the nodes go towards the right side of the tree so it
+    ends up looking like a linked list.
+
+Q7: Research on your own the height you would expect for the tree produced by 
+    the sorted input and for the tree produced by the random input. Give the 
+    approximate height you would expect for each tree based on the size of the 
+    tree, N. Then build the tree for different sizes of sorted and randomly 
+    ordered input, report your results, and comment on whether what you 
+    see matches your expectations. Be sure to cite your source for the 
+    heights you expect.
+
+    Answer
+    ------
+    The height for the sorted tree is one less than the number of actors inside
+    the tree. The reason being is because we start counting the height from 0.
+    For the sorted tree, the height is 11793. This happens because we are not
+    balancing the BST, so we get a long tree that is no different than a linked
+    list. For the not sorted tree, the height is 32, so we have the tree having
+    actual branches that have left/right children. When we decided to check for
+    a sorted BST with the numbers 0 to 9, we got a height of 9 because it was
+    a tree that all went one way leaning to the right. When we did the numbers
+    randomly we got a height of 4. The reason being is because 4 was the root
+    node and it ended up being longer on the right side of the tree.We expected
+    a height of 5 because 10 digits were inputted, so We expected half of the
+    height. We was making the assumption that the tree would just be half of
+    the numbers inputted. We didn't use any resource to make this conclusion
+
