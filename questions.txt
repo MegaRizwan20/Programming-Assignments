@@ -5,7 +5,12 @@
  * CSE Login: cs100sgv, zhg050
  */
 
-Q1. BSTNodeInt.o testBST.o BSTInt.o
+Q1. What are all the files that are created when I type 'make bst'
+ for the first time?
+   
+    Answer
+    ------
+    BSTNodeInt.o testBST.o BSTInt.o
 
 Q2. In the file BSTInt.cpp, remove the name scope from the insert 
 function. That is, change the function header from
@@ -116,12 +121,9 @@ Q7: Research on your own the height you would expect for the tree produced by
     For the sorted tree, the height is 11793. This happens because we are not
     balancing the BST, so we get a long tree that is no different than a linked
     list. For the not sorted tree, the height is 32, so we have the tree having
-    actual branches that have left/right children. When we decided to check for
-    a sorted BST with the numbers 0 to 9, we got a height of 9 because it was
+    actual branches that have left/right children. When we decided to check for     a sorted BST with the numbers 0 to 9, we got a height of 9 because it was
     a tree that all went one way leaning to the right. When we did the numbers
-    randomly we got a height of 4. The reason being is because 4 was the root
-    node and it ended up being longer on the right side of the tree.We expected
-    a height of 5 because 10 digits were inputted, so We expected half of the
-    height. We was making the assumption that the tree would just be half of
-    the numbers inputted. We didn't use any resource to make this conclusion
+    randomly we got a height of 4. Then we used subsets of actors.txt and actors    _sorted.txt explore the height of BST with different inputs. The height of
+    subset with size 10 is 4. The height of sorted subset with size 10 is 9. The    height of subset with size 100 is 14, sorted subset with size 100 is 99. The    height of subset with size 1000 is 23, sorted subset with size 1000 is 999.     The expected height of sorted input is n-1; the expected height of randomly     ordered input is log(n). We cited this sulotion from the reading material ht    tps://stepik.org/lesson/BST-Average-Case-Time-Complexity-31698/step/6?course    =Data-Structures-(CSE-100)&unit=11882. For sorted input, the results matched    expectations. However, for randomly sorted input, it seems the results 
+    didn't match the expected values very well. We think the reason is that the     expected value is an average-case. We cannot reach the expected value until     we do a larege number of experiments.   
 
